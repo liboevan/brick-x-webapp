@@ -226,7 +226,7 @@
 </template>
 
 <script>
-import { getApiConfig } from '../config/dashboard.js'
+import { getApiConfig } from '../config/dashboard'
 import NTPServerClientsModal from './NTPServerClientsModal.vue'
 import NTPServersManagerModal from './NTPServersManagerModal.vue'
 import Layout from './Layout.vue'

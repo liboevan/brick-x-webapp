@@ -1,18 +1,68 @@
 // Dashboard Configuration
 // Uses runtime configuration from /config.js
 
-// Get runtime configuration
-const getRuntimeConfig = () => {
-  if (!window.BRICK_CONFIG) {
-    console.error('❌ BRICK_CONFIG not found! Please ensure /config.js is loaded.')
-    throw new Error('Configuration file not loaded. Please check /config.js exists and is loaded before the app.')
-  }
-  return window.BRICK_CONFIG
+interface BrickFeature {
+  title: string;
+  description: string;
+  icon: string;
+  url: string;
+  color: string;
+  enabled: boolean;
 }
 
-// Convert runtime config to dashboard format
-export const getConfig = () => {
-  const config = getRuntimeConfig()
+interface BrickConfig {
+  app: {
+    title: string;
+    environment: string;
+  };
+  features: {
+    customNTP: BrickFeature;
+    sentinel: BrickFeature;
+    gateway: BrickFeature;
+    login: BrickFeature;
+  };
+  system: {
+    name: string;
+    version: string;
+    status: string;
+  };
+  api: {
+    baseUrl: string;
+    customNTP: { baseUrl: string };
+    sentinel: { baseUrl: string };
+  };
+}
+
+declare global {
+  interface Window {
+    BRICK_CONFIG?: BrickConfig;
+  }
+}
+
+// 获取运行时配置
+const getRuntimeConfig = (): BrickConfig => {
+  if (!window.BRICK_CONFIG) {
+    console.error('❌ BRICK_CONFIG not found! Please ensure /config.js is loaded.');
+    throw new Error('Configuration file not loaded. Please check /config.js exists and is loaded before the app.');
+  }
+  return window.BRICK_CONFIG;
+};
+
+// 导出类型
+export interface DashboardConfig {
+  title: string;
+  subtitle: string;
+  features: Array<BrickFeature & { id: string }>;
+  system: BrickConfig['system'];
+  theme: {
+    primaryColor: string;
+    secondaryColor: string;
+    accentColor: string;
+  };
+}
+
+export const getConfig = (): DashboardConfig => {
+  const config = getRuntimeConfig();
   
   return {
     title: config.app.title,
@@ -75,8 +125,12 @@ export const getConfig = () => {
 }
 
 // API configuration getter
-export const getApiConfig = () => {
-  const config = getRuntimeConfig()
+export const getApiConfig = (): {
+  gatewayUrl: string;
+  customNTPApi: string;
+  sentinelApi: string;
+} => {
+  const config = getRuntimeConfig();
   return {
     gatewayUrl: config.api.baseUrl,
     customNTPApi: config.api.customNTP.baseUrl, // Use the customNTP baseUrl directly
@@ -85,7 +139,7 @@ export const getApiConfig = () => {
 }
 
 // Environment getter
-export const getEnvironment = () => {
-  const config = getRuntimeConfig()
+export const getEnvironment = (): string => {
+  const config = getRuntimeConfig();
   return config.app.environment
 } 
