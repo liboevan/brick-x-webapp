@@ -1,3 +1,5 @@
+[中文](README.md) | English
+
 # Brick X Webapp
 
 Brick X web application providing user interface and static file services.

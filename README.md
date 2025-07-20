@@ -1,3 +1,5 @@
+[English](README.en.md) | 中文
+
 # Brick X Webapp
 
 Brick X Web 应用，提供用户界面和静态文件服务。

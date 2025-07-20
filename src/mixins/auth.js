@@ -56,11 +56,16 @@ export default {
           try {
             const tokenParts = data.token.split('.')
             if (tokenParts.length === 3) {
-              const payload = JSON.parse(atob(tokenParts[1]))
+              // Handle base64 decoding properly
+              const base64 = tokenParts[1].replace(/-/g, '+').replace(/_/g, '/')
+              const payload = JSON.parse(atob(base64))
               localStorage.setItem('user', JSON.stringify({
                 username: payload.username,
                 role: payload.role,
-                permissions: payload.permissions || []
+                permissions: payload.permissions || [],
+                first_name: payload.first_name || '',
+                last_name: payload.last_name || '',
+                email: payload.email || ''
               }))
             }
           } catch (e) {
@@ -92,7 +97,7 @@ export default {
       this.isAuthenticated = false
       this.user = null
       
-      this.$router.push('/login')
+      this.$router.push('/')
     },
     
     // Check if user has specific permission
