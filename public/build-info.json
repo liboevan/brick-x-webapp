@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-dev",
+  "buildDateTime": "2025-07-13T06:44:38Z",
+  "buildTimestamp": 1752389078,
+  "environment": "production",
+  "service": "brick-x-webapp",
+  "description": "Frontend Application"
+}
