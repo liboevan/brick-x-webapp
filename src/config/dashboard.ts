@@ -39,7 +39,7 @@ declare global {
   }
 }
 
-// 获取运行时配置
+// Get runtime configuration
 const getRuntimeConfig = (): BrickConfig => {
   if (!window.BRICK_CONFIG) {
     console.error('❌ BRICK_CONFIG not found! Please ensure /config.js is loaded.');
@@ -48,7 +48,7 @@ const getRuntimeConfig = (): BrickConfig => {
   return window.BRICK_CONFIG;
 };
 
-// 导出类型
+// Export types
 export interface DashboardConfig {
   title: string;
   subtitle: string;

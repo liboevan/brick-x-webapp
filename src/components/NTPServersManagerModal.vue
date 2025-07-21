@@ -140,7 +140,7 @@ const saving = ref(false)
 const serverMessage = ref('')
 const router = useRouter()
 
-// 权限判断函数
+// Permission check function
 function hasClockWrite() {
   const user = JSON.parse(localStorage.getItem('user') || '{}')
   return user.permissions && user.permissions.includes('x/clock:write')

@@ -270,7 +270,7 @@ export default {
   },
   computed: {
     trackingDisplayList() {
-      // 只显示常用的几个字段，顺序可调整
+      // Display only commonly used fields in a specific order
       const t = this.status.tracking || {};
       return {
         'Last Offset': t['Last offset'] || 'Unknown',
