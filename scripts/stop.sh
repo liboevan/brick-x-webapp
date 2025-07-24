@@ -26,7 +26,7 @@ print_error() {
 }
 
 # Container configuration
-CONTAINER_NAME="el-brick-x-webapp"
+CONTAINER_NAME="brick-x-webapp"
 
 # Function to show help
 show_help() {
@@ -112,4 +112,4 @@ if [[ $# -eq 0 ]]; then
     stop_service
 else
     stop_service "$@"
-fi 
+fi

@@ -5,10 +5,10 @@
 
 # Project Configuration
 PROJECT_NAME="brick-x-webapp"
-IMAGE_NAME="el/brick-x-webapp"
-CONTAINER_NAME="el-brick-x-webapp"
+IMAGE_NAME="brick-x-webapp"
+CONTAINER_NAME="brick-x-webapp"
 WEB_PORT="17100"
-NETWORK_NAME="el-brick-x-network"
+NETWORK_NAME="brick-x-network"
 DEFAULT_VERSION="0.1.0-dev"  # Default version for build
 RUN_VERSION="0.1.0-dev"      # Version for start/stop operations
 
@@ -39,4 +39,4 @@ print_header() {
 }
 
 # Note: Individual scripts handle their own Docker operations
-# This file only provides shared configuration variables 
+# This file only provides shared configuration variables

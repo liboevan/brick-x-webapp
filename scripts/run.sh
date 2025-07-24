@@ -26,10 +26,10 @@ print_error() {
 }
 
 # Container configuration
-CONTAINER_NAME="el-brick-x-webapp"
-IMAGE_NAME="el/brick-x-webapp:latest"
+CONTAINER_NAME="brick-x-webapp"
+IMAGE_NAME="brick-x-webapp:latest"
 PORT="17100"
-NETWORK_NAME="el-brick-x-network"
+NETWORK_NAME="brick-x-network"
 
 case "${1:-help}" in
     "start")
@@ -167,4 +167,4 @@ case "${1:-help}" in
         echo -e ""
         echo -e "${BLUE}======================================${NC}"
         ;;
-esac 
+esac

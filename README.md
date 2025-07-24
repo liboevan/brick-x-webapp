@@ -152,7 +152,7 @@ curl http://localhost:17100/
 curl http://localhost:17100/
 
 # 检查容器详情
-docker inspect el-brick-x-webapp
+docker inspect brick-x-webapp
 ```
 
 ## 🎯 最佳实践
@@ -170,4 +170,4 @@ docker inspect el-brick-x-webapp
 2. 查看服务日志: `./scripts/run.sh logs`
 3. 验证页面访问: 浏览器访问 http://localhost:17100
 4. 确认密钥文件: 检查 `public.pem`
-5. 测试端点: 使用 curl 测试页面访问 
+5. 测试端点: 使用 curl 测试页面访问
