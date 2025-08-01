@@ -102,7 +102,7 @@ services:
     image: brick-x-webapp:latest
     container_name: brick-x-webapp
     ports:
-      - "8080:17100"  # 修复：使用正确的端口映射
+      - "8080:17107"  # 修复：使用正确的端口映射
     depends_on:
       - brick-x-auth-service
     networks:
@@ -131,4 +131,4 @@ echo "  - x-admin (password: admin123)"
 echo "  - x-operator (password: operator123)"
 echo "  - x-observer (password: observer123)"
 echo ""
-print_warning "Remember to change default passwords in production!" 
+print_warning "Remember to change default passwords in production!"

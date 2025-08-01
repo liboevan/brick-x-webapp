@@ -37,7 +37,9 @@ export default {
     // Login method
     async login(username, password) {
       try {
-        const response = await fetch('/api/auth/login', {
+        // 使用配置文件中的登录URL
+        const loginUrl = window.BRICK_CONFIG.features?.login?.url || '/login'
+        const response = await fetch(loginUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -135,4 +137,4 @@ export default {
       }
     }
   }
-} 
+}

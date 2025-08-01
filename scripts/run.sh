@@ -28,7 +28,7 @@ print_error() {
 # Container configuration
 CONTAINER_NAME="brick-x-webapp"
 IMAGE_NAME="brick-x-webapp:latest"
-PORT="17100"
+PORT="17107"
 NETWORK_NAME="brick-x-network"
 
 case "${1:-help}" in

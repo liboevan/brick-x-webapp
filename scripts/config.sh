@@ -7,7 +7,7 @@
 PROJECT_NAME="brick-x-webapp"
 IMAGE_NAME="brick-x-webapp"
 CONTAINER_NAME="brick-x-webapp"
-WEB_PORT="17100"
+WEB_PORT="17107"
 NETWORK_NAME="brick-x-network"
 DEFAULT_VERSION="0.1.0-dev"  # Default version for build
 RUN_VERSION="0.1.0-dev"      # Version for start/stop operations

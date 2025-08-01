@@ -52,7 +52,7 @@ COPY --from=build-stage /app/build-info.json /build-info.json
 RUN rm -f /etc/nginx/conf.d/default.conf
 
 # Expose port
-EXPOSE 17100
+EXPOSE 17107
 
 # Start nginx
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]

@@ -2,7 +2,7 @@
 
 # Brick X Webapp
 
-Brick X Web 应用，提供用户界面和静态文件服务。
+Brick X Web 应用，提供用户界面和静态文件服务。**注意：当前版本不代理其他服务。**
 
 ## 🏗️ 架构
 
@@ -18,7 +18,7 @@ Brick X Web 应用，提供用户界面和静态文件服务。
 - **服务**: Nginx + Alpine Linux
 - **构建**: Node.js 20 + npm
 - **容器**: Docker + 多阶段构建
-- **端口**: 17100
+- **端口**: 17107
 
 ## 🚀 快速开始
 
@@ -62,7 +62,7 @@ Brick X Web 应用，提供用户界面和静态文件服务。
 - `TZ=UTC` - 时区设置
 
 ### 端口
-- **17100** - HTTP Web 服务端口
+- **17107** - HTTP Web 服务端口
 
 ### 端点
 - `GET /` - 主页
@@ -103,7 +103,7 @@ Brick X Web 应用，提供用户界面和静态文件服务。
 
 ### 健康检查
 ```bash
-curl http://localhost:17100/
+curl http://localhost:17107/
 ```
 
 ### 构建信息
@@ -125,7 +125,7 @@ curl http://localhost:17100/
 2. **端口被占用**
    ```bash
    # 检查端口使用
-   sudo lsof -i :17100
+   sudo lsof -i :17107
    
    # 停止现有容器
    ./scripts/run.sh stop
@@ -149,7 +149,7 @@ curl http://localhost:17100/
 ./scripts/run.sh logs -f
 
 # 测试页面访问
-curl http://localhost:17100/
+curl http://localhost:17107/
 
 # 检查容器详情
 docker inspect brick-x-webapp
@@ -168,6 +168,6 @@ docker inspect brick-x-webapp
 如有问题或疑问：
 1. 检查服务状态: `./scripts/run.sh status`
 2. 查看服务日志: `./scripts/run.sh logs`
-3. 验证页面访问: 浏览器访问 http://localhost:17100
+3. 验证页面访问: 浏览器访问 http://localhost:17107
 4. 确认密钥文件: 检查 `public.pem`
 5. 测试端点: 使用 curl 测试页面访问

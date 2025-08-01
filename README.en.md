@@ -2,7 +2,7 @@
 
 # Brick X Webapp
 
-Brick X web application providing user interface and static file services.
+Brick X web application providing user interface and static file services. **Note: The current version does not proxy other services.**
 
 ## 🏗️ Architecture
 
@@ -18,7 +18,7 @@ Brick X web application providing user interface and static file services.
 - **Service**: Nginx + Alpine Linux
 - **Build**: Node.js 20 + npm
 - **Container**: Docker + Multi-stage build
-- **Port**: 17100
+- **Port**: 17107
 
 ## 🚀 Quick Start
 
@@ -62,7 +62,7 @@ Brick X web application providing user interface and static file services.
 - `TZ=UTC` - Timezone setting
 
 ### Ports
-- **17100** - HTTP web service port
+- **17107** - HTTP web service port
 
 ### Endpoints
 - `GET /` - Homepage
@@ -103,7 +103,7 @@ Brick X web application providing user interface and static file services.
 
 ### Health Check
 ```bash
-curl http://localhost:17100/
+curl http://localhost:17107/
 ```
 
 ### Build Information
@@ -125,7 +125,7 @@ curl http://localhost:17100/
 2. **Port Already in Use**
    ```bash
    # Check port usage
-   sudo lsof -i :17100
+   sudo lsof -i :17107
    
    # Stop existing container
    ./scripts/run.sh stop
@@ -149,10 +149,10 @@ curl http://localhost:17100/
 ./scripts/run.sh logs -f
 
 # Test page access
-curl http://localhost:17100/
+curl http://localhost:17107/
 
 # Check container details
-docker inspect el-brick-x-webapp
+docker inspect brick-x-webapp
 ```
 
 ## 🎯 Best Practices
@@ -168,6 +168,6 @@ docker inspect el-brick-x-webapp
 For issues or questions:
 1. Check service status: `./scripts/run.sh status`
 2. View service logs: `./scripts/run.sh logs`
-3. Verify page access: Browser visit http://localhost:17100
+3. Verify page access: Browser visit http://localhost:17107
 4. Confirm key files: Check `public.pem`
-5. Test endpoints: Use curl to test page access 
+5. Test endpoints: Use curl to test page access
