@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     isSuperAdmin() {
-      return this.user && this.user.role === 'x-superadmin'
+      return this.userComputed && this.userComputed.role === 'x-superadmin'
     }
   },
   methods: {
@@ -224,4 +224,4 @@ export default {
     min-width: 180px;
   }
 }
-</style> 
+</style>

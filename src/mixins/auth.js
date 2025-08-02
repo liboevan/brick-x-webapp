@@ -9,22 +9,12 @@ export default {
   computed: {
     // Check if user is authenticated
     isAuthenticatedComputed() {
-      return localStorage.getItem('isAuthenticated') === 'true' && 
-             localStorage.getItem('jwt_token') !== null
+      return this.isAuthenticated
     },
     
     // Get current user info
     userComputed() {
-      const userStr = localStorage.getItem('user')
-      if (userStr) {
-        try {
-          return JSON.parse(userStr)
-        } catch (e) {
-          console.warn('Failed to parse user data:', e)
-          return null
-        }
-      }
-      return null
+      return this.user
     },
     
     // Check if user is super admin
@@ -62,7 +52,7 @@ export default {
               const base64 = tokenParts[1].replace(/-/g, '+').replace(/_/g, '/')
               const payload = JSON.parse(atob(base64))
               localStorage.setItem('user', JSON.stringify({
-                username: payload.username,
+                username: payload.username || payload.email || 'User',
                 role: payload.role,
                 permissions: payload.permissions || [],
                 first_name: payload.first_name || '',
@@ -76,7 +66,8 @@ export default {
           
           // Update reactive data
           this.isAuthenticated = true
-          this.user = JSON.parse(localStorage.getItem('user'))
+          // Use the dedicated method to update user data
+          this.updateUserFromLocalStorage()
           
           return true
         } else {
@@ -91,6 +82,7 @@ export default {
     
     // Logout method
     logout() {
+      // Clear authentication data
       localStorage.removeItem('jwt_token')
       localStorage.removeItem('isAuthenticated')
       localStorage.removeItem('user')
@@ -99,7 +91,16 @@ export default {
       this.isAuthenticated = false
       this.user = null
       
-      this.$router.push('/')
+      // Force component to re-render
+      this.$forceUpdate()
+      
+      // Force redirect to home page
+      try {
+        this.$router.push('/')
+      } catch (error) {
+        console.error('Router push failed:', error)
+        // Fallback redirect if router is unavailable
+        window.location.href = '/'}
     },
     
     // Check if user has specific permission
@@ -122,18 +123,37 @@ export default {
       return {
         'Content-Type': 'application/json'
       }
+    },
+
+    // Update user data from localStorage
+    updateUserFromLocalStorage() {
+      const userStr = localStorage.getItem('user')
+      if (userStr) {
+        try {
+          this.user = JSON.parse(userStr)
+        } catch (e) {
+          console.warn('Failed to parse user data:', e)
+          this.user = null
+        }
+      } else {
+        this.user = null
+      }
     }
   },
-  
+
   mounted() {
     // Update reactive data from localStorage
     this.isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
-    const userStr = localStorage.getItem('user')
-    if (userStr) {
-      try {
-        this.user = JSON.parse(userStr)
-      } catch (e) {
-        console.warn('Failed to parse user data:', e)
+    this.updateUserFromLocalStorage()
+  },
+
+  // Watch for changes in localStorage
+  watch: {
+    isAuthenticatedComputed(newVal) {
+      if (newVal) {
+        this.updateUserFromLocalStorage()
+      } else {
+        this.user = null
       }
     }
   }

@@ -24,7 +24,7 @@
         <!-- User Avatar with Tooltip -->
         <div class="user-avatar-container" 
              @mouseenter="handleAvatarMouseEnter"
-             @mouseleave="handleAvatarMouseLeave">
+vibcl              @mouseleave="handleAvatarMouseLeave">
           <div class="user-avatar" :title="userComputed?.first_name && userComputed?.last_name ? `${userComputed.first_name} ${userComputed.last_name}` : userComputed?.username || 'Guest'">
             <img 
               v-if="userComputed?.avatarUrl" 
@@ -443,4 +443,4 @@ export default {
     display: none;
   }
 }
-</style> 
+</style>

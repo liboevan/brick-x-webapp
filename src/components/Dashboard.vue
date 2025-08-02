@@ -8,7 +8,7 @@
     <!-- Page Controls in Header -->
     <template #pageControls>
       <div class="dashboard-info">
-        <span class="welcome-text">Welcome back, {{ user?.username || 'Guest' }}!</span>
+        <span class="welcome-text">Welcome back</span>
         <span class="last-login">Last login: {{ lastLoginTime }}</span>
       </div>
     </template>
@@ -444,4 +444,4 @@ export default {
     display: none;
   }
 }
-</style> 
+</style>
