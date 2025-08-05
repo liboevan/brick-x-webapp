@@ -62,20 +62,28 @@
                 <thead>
                   <tr>
                     <th class="th-address">
-                      <span class="th-icon">🌐</span>
-                      Client Address
+                      <div class="th-content">
+                        <span class="th-icon">🌐</span>
+                        Client Address
+                      </div>
                     </th>
                     <th class="th-packets">
-                      <span class="th-icon">📦</span>
-                      NTP Packets
+                      <div class="th-content">
+                        <span class="th-icon">📦</span>
+                        NTP Packets
+                      </div>
                     </th>
                     <th class="th-dropped">
-                      <span class="th-icon">❌</span>
-                      Dropped
+                      <div class="th-content">
+                        <span class="th-icon">❌</span>
+                        Dropped
+                      </div>
                     </th>
                     <th class="th-offset">
-                      <span class="th-icon">⏱️</span>
-                      Offset
+                      <div class="th-content">
+                        <span class="th-icon">⏱️</span>
+                        Offset
+                      </div>
                     </th>
                   </tr>
                 </thead>
@@ -474,10 +482,24 @@ onMounted(() => {
   font-weight: 600;
   color: #495057;
   border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.th-content {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
+}
+
+.th-address {
+  width: 35%;
+}
+
+.th-packets,
+.th-dropped,
+.th-offset {
+  width: 20%;
 }
 
 .th-icon {
@@ -638,4 +660,4 @@ onMounted(() => {
     padding: 0.5rem 0.4rem;
   }
 }
-</style> 
+</style>
