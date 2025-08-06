@@ -16,6 +16,17 @@
           <div class="item-label">NTP</div>
         </router-link>
         
+        <!-- Gateway Monitor - Requires layout:read permission -->
+        <a 
+          v-if="hasPermission('x/layout:read')" 
+          href="/gateway" 
+          class="menu-item" 
+          @click="hideMenu"
+        >
+          <div class="item-icon">🔌</div>
+          <div class="item-label">Gateway Monitor</div>
+        </a>
+
         <!-- Admin Management (Super Admin Only) -->
         <router-link 
           v-if="isSuperAdmin" 

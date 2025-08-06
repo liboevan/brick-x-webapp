@@ -1,16 +1,31 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import * as VueRouter from 'vue-router'
+const { createRouter, createWebHistory } = VueRouter
+// Type alias for RouteRecordRaw
+type RouteRecordRaw = VueRouter.RouteRecordRaw
 import App from './App.vue'
 import Dashboard from './components/Dashboard.vue'
 import Login from './components/Login.vue'
 import CustomNTP from './components/CustomNTP.vue'
-import type { RouteMeta } from './types'
+import SmartHomeBeta from './components/SmartHomeBeta.vue'
+import { RouteMeta } from './types/index'
 
 const routes: RouteRecordRaw[] = [
   { 
     path: '/', 
     component: Dashboard,
     meta: { requiresAuth: false } as RouteMeta
+  },
+  // Gateway route is handled by Nginx, not Vue Router
+  { 
+    path: '/gateway', 
+    beforeEnter: (to: any, from: any, next: any) => {
+      // This will cause the browser to make a new request to /gateway
+      // which will be handled by Nginx
+      window.location.href = '/gateway';
+      return false;
+    },
+    meta: { requiresAuth: true } as RouteMeta
   },
   { 
     path: '/login', 
@@ -25,6 +40,11 @@ const routes: RouteRecordRaw[] = [
     path: '/clock', 
     component: CustomNTP,
     meta: { requiresAuth: true } as RouteMeta
+  },
+  { 
+    path: '/smart-home', 
+    component: SmartHomeBeta,
+    meta: { requiresAuth: true, permissions: ['smart:read'] } as RouteMeta
   },
   { 
     path: '/:pathMatch(.*)*', 
@@ -84,4 +104,4 @@ const app = createApp(App)
 app.use(router)
 
 // Mount app
-app.mount('#app') 
+app.mount('#app')

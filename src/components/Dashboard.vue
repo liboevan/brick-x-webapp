@@ -54,37 +54,23 @@
       <div class="quick-actions">
         <h2>Quick Actions</h2>
         <div class="actions-grid">
-          <router-link to="/ntp" class="action-card">
-            <div class="action-icon">⏰</div>
+          <component
+            v-for="feature in features"
+            :key="feature.id"
+            :is="feature.url.startsWith('http') ? 'a' : 'router-link'"
+            :to="!feature.url.startsWith('http') ? feature.url : undefined"
+            :href="feature.url.startsWith('http') ? feature.url : undefined"
+            :target="feature.url.startsWith('http') ? '_blank' : undefined"
+            :rel="feature.url.startsWith('http') ? 'noopener noreferrer' : undefined"
+            class="action-card"
+            :style="{ backgroundColor: `${feature.color}15`, borderLeft: `4px solid ${feature.color}` }"
+          >
+            <div class="action-icon">{{ feature.icon }}</div>
             <div class="action-content">
-              <h3>NTP Management</h3>
-              <p>Configure and monitor time synchronization</p>
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.description }}</p>
             </div>
-          </router-link>
-          
-          <router-link v-if="isSuperAdmin" to="/admin" class="action-card">
-            <div class="action-icon">🔧</div>
-            <div class="action-content">
-              <h3>Admin Panel</h3>
-              <p>Manage users, roles, and permissions</p>
-            </div>
-          </router-link>
-          
-          <div class="action-card">
-            <div class="action-icon">📊</div>
-            <div class="action-content">
-              <h3>System Status</h3>
-              <p>View system health and performance</p>
-            </div>
-          </div>
-          
-          <div class="action-card">
-            <div class="action-icon">⚙️</div>
-            <div class="action-content">
-              <h3>Settings</h3>
-              <p>Configure application preferences</p>
-            </div>
-          </div>
+          </component>
         </div>
       </div>
 
@@ -107,12 +93,15 @@
 
 <script>
 import Layout from './Layout.vue'
+import { getConfig } from '../config/dashboard'
+import authMixin from '../mixins/auth.js'
 
 export default {
   name: 'Dashboard',
   components: {
     Layout
   },
+  mixins: [authMixin],
   data() {
     return {
       stats: {
@@ -151,7 +140,8 @@ export default {
           title: 'Configuration updated',
           timestamp: new Date(Date.now() - 3600000) // 1 hour ago
         }
-      ]
+      ],
+      features: []
     }
   },
   computed: {
@@ -160,6 +150,20 @@ export default {
     }
   },
   mounted() {
+    // Load features from config
+    const config = getConfig()
+    this.features = config.features.filter(feature => {
+      // Check if feature is enabled
+      if (!feature.enabled) return false
+      
+      // Check permissions if any
+      if (feature.permissions && feature.permissions.length > 0) {
+        return feature.permissions.every(permission => this.hasPermission(permission))
+      }
+      
+      return true
+    })
+    
     // Set browser title
     document.title = 'Brick - Dashboard'
   },

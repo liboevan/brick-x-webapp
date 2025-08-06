@@ -8,6 +8,7 @@ interface BrickFeature {
   url: string;
   color: string;
   enabled: boolean;
+  permissions?: string[];
 }
 
 interface BrickConfig {
@@ -20,6 +21,7 @@ interface BrickConfig {
     sentinel: BrickFeature;
     gateway: BrickFeature;
     login: BrickFeature;
+    smartHome: BrickFeature;
   };
   system: {
     name: string;
@@ -35,7 +37,7 @@ interface BrickConfig {
 
 declare global {
   interface Window {
-    BRICK_CONFIG?: BrickConfig;
+    BRICK_CONFIG: BrickConfig;
   }
 }
 
@@ -105,6 +107,16 @@ export const getConfig = (): DashboardConfig => {
         url: config.features.login.url,
         color: config.features.login.color,
         enabled: config.features.login.enabled
+      },
+      {
+        id: 'smartHome',
+        title: config.features.smartHome.title,
+        description: config.features.smartHome.description,
+        icon: config.features.smartHome.icon,
+        url: config.features.smartHome.url,
+        color: config.features.smartHome.color,
+        enabled: config.features.smartHome.enabled,
+        permissions: config.features.smartHome.permissions || []
       }
     ],
 
@@ -142,4 +154,4 @@ export const getApiConfig = (): {
 export const getEnvironment = (): string => {
   const config = getRuntimeConfig();
   return config.app.environment
-} 
+}

@@ -27,6 +27,31 @@
             </router-link>
           </li>
 
+          <!-- Smart Home - Requires x/smart:read permission -->
+          <li v-if="hasPermission('x/smart:read')" class="nav-item">
+            <router-link 
+              to="/smart-home" 
+              class="nav-link"
+              :class="{ active: $route.path === '/smart-home' }"
+              :title="collapsed ? 'Smart Home Management' : ''"
+            >
+              <span class="nav-icon">🏠</span>
+              <span v-if="!collapsed" class="nav-label">Smart Home Beta</span>
+            </router-link>
+          </li>
+
+          <!-- Gateway Monitor - Requires layout:read permission -->
+          <li v-if="hasPermission('x/layout:read')" class="nav-item">
+            <a 
+              href="/gateway" 
+              class="nav-link"
+              :title="collapsed ? 'Gateway Monitor' : ''"
+            >
+              <span class="nav-icon">🔌</span>
+              <span v-if="!collapsed" class="nav-label">Gateway Monitor</span>
+            </a>
+          </li>
+
           <!-- Admin Management - Only for super-admin -->
           <li v-if="isSuperAdmin" class="nav-item">
             <router-link 
@@ -353,4 +378,4 @@ export default {
 .nav-content::-webkit-scrollbar-thumb:hover {
   background: rgba(76, 175, 80, 0.5);
 }
-</style> 
+</style>

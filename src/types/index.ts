@@ -117,6 +117,7 @@ export interface RouteMeta {
   requiresAuth?: boolean
   requiresSuperAdmin?: boolean
   title?: string
+  permissions?: string[]
   [key: string]: unknown
   [key: symbol]: unknown
 }
@@ -127,4 +128,4 @@ declare global {
     BRICK_CONFIG: BrickConfig
     BUILD_INFO?: BuildInfo
   }
-} 
+}

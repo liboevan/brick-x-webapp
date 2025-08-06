@@ -42,7 +42,8 @@ window.BRICK_CONFIG = {
       description: 'Configure and manage NTP time synchronization',
       icon: '🕐',
       url: '/ntp',
-      color: '#4CAF50'
+      color: '#4CAF50',
+      permissions: ['x/clock:read']
     },
     sentinel: {
       enabled: true,
@@ -58,7 +59,8 @@ window.BRICK_CONFIG = {
       description: 'Reverse proxy and traffic management',
       icon: '🚪',
       url: '/gateway',
-      color: '#2196F3'
+      color: '#2196F3',
+      permissions: ['x/layout:read']
     },
     login: {
       enabled: true,
@@ -67,6 +69,15 @@ window.BRICK_CONFIG = {
       icon: '🔑',
       url: '/login',
       color: '#9C27B0'
+    },
+    smartHome: {
+      enabled: true,
+      title: 'Smart Home',
+      description: 'Manage your smart home devices and scenes',
+      icon: '🏠',
+      url: '/smart-home',
+      color: '#8BC34A',
+      permissions: ['x/smart:read']
     }
   },
 
@@ -82,4 +93,4 @@ window.BRICK_CONFIG = {
     enabled: false,
     logLevel: 'info'
   }
-}; 
+};
