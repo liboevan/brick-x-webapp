@@ -10,39 +10,57 @@
     <!-- Expanded Menu -->
     <div v-if="showMenu" class="nav-menu" :class="{ expanded: showMenu }">
       <div class="menu-grid">
-        <!-- NTP Service -->
-        <router-link to="/ntp" class="menu-item" @click="hideMenu">
-          <div class="item-icon">⏰</div>
-          <div class="item-label">NTP</div>
-        </router-link>
-        
-        <!-- Gateway Monitor - Requires layout:read permission -->
-        <a 
-          v-if="hasPermission('x/layout:read')" 
-          href="/gateway" 
-          class="menu-item" 
-          @click="hideMenu"
-        >
-          <div class="item-icon">🔌</div>
-          <div class="item-label">Gateway Monitor</div>
-        </a>
+          <!-- Dashboard - First item -->
+          <router-link to="/" class="menu-item" @click="hideMenu">
+            <div class="item-icon">📊</div>
+            <div class="item-label">Dashboard</div>
+          </router-link>
 
-        <!-- Admin Management (Super Admin Only) -->
-        <router-link 
-          v-if="isSuperAdmin" 
-          to="/admin" 
-          class="menu-item" 
-          @click="hideMenu"
-        >
-          <div class="item-icon">🔧</div>
-          <div class="item-label">Admin</div>
-        </router-link>
-        
-        <!-- Dashboard -->
-        <router-link to="/" class="menu-item" @click="hideMenu">
-          <div class="item-icon">📊</div>
-          <div class="item-label">Dashboard</div>
-        </router-link>
+          <!-- Gateway Monitor - Requires x/layout:read permission -->
+          <a 
+            v-if="hasPermission('x/layout:read')" 
+            href="/gateway" 
+            class="menu-item" 
+            @click="hideMenu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="item-icon">🔌</div>
+            <div class="item-label">Gateway Monitor</div>
+          </a>
+
+          <!-- NTP - Requires x/clock:read permission -->
+          <router-link 
+            v-if="hasPermission('x/clock:read')" 
+            to="/ntp" 
+            class="menu-item" 
+            @click="hideMenu"
+          >
+            <div class="item-icon">⏰</div>
+            <div class="item-label">NTP</div>
+          </router-link>
+
+          <!-- Smart Home - Requires x/smart:read permission -->
+          <router-link 
+            v-if="hasPermission('x/smart:read')" 
+            to="/smart-home" 
+            class="menu-item" 
+            @click="hideMenu"
+          >
+            <div class="item-icon">🏠</div>
+            <div class="item-label">Smart Home Beta</div>
+          </router-link>
+
+          <!-- Admin Management (Super Admin Only) -->
+          <router-link 
+            v-if="isSuperAdmin" 
+            to="/admin" 
+            class="menu-item" 
+            @click="hideMenu"
+          >
+            <div class="item-icon">🔧</div>
+            <div class="item-label">Admin</div>
+          </router-link>
       </div>
     </div>
   </div>

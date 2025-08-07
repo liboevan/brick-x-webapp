@@ -14,8 +14,35 @@
       <div class="nav-section">
         <h3 v-if="!collapsed" class="nav-section-title">Services</h3>
         <ul class="nav-list">
-          <!-- NTP - Available to all authenticated users -->
-          <li v-if="isAuthenticated" class="nav-item">
+          <!-- Dashboard - First item -->
+          <li class="nav-item">
+            <router-link 
+              to="/" 
+              class="nav-link"
+              :class="{ active: $route.path === '/' }"
+              :title="collapsed ? 'Dashboard' : ''"
+            >
+              <span class="nav-icon">📊</span>
+              <span v-if="!collapsed" class="nav-label">Dashboard</span>
+            </router-link>
+          </li>
+
+          <!-- Gateway Monitor - Requires x/layout:read permission -->
+          <li v-if="hasPermission('x/layout:read')" class="nav-item">
+            <a 
+              href="/gateway" 
+              class="nav-link"
+              :title="collapsed ? 'Gateway Monitor' : ''"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="nav-icon">🔌</span>
+              <span v-if="!collapsed" class="nav-label">Gateway Monitor</span>
+            </a>
+          </li>
+
+          <!-- NTP - Requires x/clock:read permission -->
+          <li v-if="hasPermission('x/clock:read')" class="nav-item">
             <router-link 
               to="/ntp" 
               class="nav-link"
@@ -38,18 +65,6 @@
               <span class="nav-icon">🏠</span>
               <span v-if="!collapsed" class="nav-label">Smart Home Beta</span>
             </router-link>
-          </li>
-
-          <!-- Gateway Monitor - Requires layout:read permission -->
-          <li v-if="hasPermission('x/layout:read')" class="nav-item">
-            <a 
-              href="/gateway" 
-              class="nav-link"
-              :title="collapsed ? 'Gateway Monitor' : ''"
-            >
-              <span class="nav-icon">🔌</span>
-              <span v-if="!collapsed" class="nav-label">Gateway Monitor</span>
-            </a>
           </li>
 
           <!-- Admin Management - Only for super-admin -->

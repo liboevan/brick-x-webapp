@@ -57,11 +57,11 @@
           <component
             v-for="feature in features"
             :key="feature.id"
-            :is="feature.url.startsWith('http') ? 'a' : 'router-link'"
-            :to="!feature.url.startsWith('http') ? feature.url : undefined"
-            :href="feature.url.startsWith('http') ? feature.url : undefined"
-            :target="feature.url.startsWith('http') ? '_blank' : undefined"
-            :rel="feature.url.startsWith('http') ? 'noopener noreferrer' : undefined"
+            :is="feature.url.startsWith('http') || feature.url === '/gateway' ? 'a' : 'router-link'"
+            :to="!(feature.url.startsWith('http') || feature.url === '/gateway') ? feature.url : undefined"
+            :href="(feature.url.startsWith('http') || feature.url === '/gateway') ? feature.url : undefined"
+            :target="(feature.url.startsWith('http') || feature.url === '/gateway') ? '_blank' : undefined"
+            :rel="(feature.url.startsWith('http') || feature.url === '/gateway') ? 'noopener noreferrer' : undefined"
             class="action-card"
             :style="{ backgroundColor: `${feature.color}15`, borderLeft: `4px solid ${feature.color}` }"
           >
@@ -197,6 +197,17 @@ export default {
   font-weight: 700;
   color: var(--primary-green);
   margin: 0;
+}
+
+/* Quick Actions Styles */
+.action-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Dashboard Info Styles */
