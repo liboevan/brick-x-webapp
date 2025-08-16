@@ -54,14 +54,14 @@ window.BRICK_CONFIG = {
       color: '#FF5722'
     },
     gateway: {
-      enabled: true,
-      title: 'Gateway Monitor',
-      description: 'Reverse proxy and traffic management',
-      icon: '🚪',
-      url: '/gateway',
-      color: '#2196F3',
-      permissions: ['x/layout:read']
-    },
+        enabled: true,
+        title: 'Gateway Monitor',
+        description: 'Reverse proxy and traffic management',
+        icon: '🚪',
+        url: '/dashboard/',
+        color: '#2196F3',
+        permissions: ['x/layout:read']
+      },
     login: {
       enabled: true,
       title: 'Login System',
