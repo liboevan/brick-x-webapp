@@ -58,7 +58,7 @@ window.BRICK_CONFIG = {
         title: 'Gateway Monitor',
         description: 'Reverse proxy and traffic management',
         icon: '🚪',
-        url: '/dashboard/',
+        url: '/gateway',
         color: '#2196F3',
         permissions: ['x/layout:read']
       },
